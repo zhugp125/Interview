@@ -41,12 +41,12 @@ char* reverse(char* input, char *output)
             reverse(temp, j, output, n);
             output[n++] = ' ';
         }
-
-        if(i == len - 1 && j != 0)
-        {
-            reverse(temp, j, output, n);
-        }
     }
+	
+	if(j != 0)
+	{
+		reverse(temp, j, output, n);
+	}
 
     return output;
 }

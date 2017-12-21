@@ -154,6 +154,74 @@ void insertSortDichotomy(int a[], int n)
     }
 }
 
+/**
+ * @brief quickSort 快速排序
+ * @param a         数组
+ * @param left      左侧起始
+ * @param right     右侧起始
+ * 平均时间复杂度：    O(nlogn)
+ */
+void quickSort(int a[], int left, int right)
+{
+    if(left >= right)
+    {
+        return ;
+    }
+
+    int i = left;
+    int j = right;
+    int key = a[left];
+    while (i < j)
+    {
+        while(i < j && key <= a[j])
+        {
+            --j;
+        }
+        a[i] = a[j];
+
+        while(i < j && key >= a[i])
+        {
+            ++i;
+        }
+        a[j] = a[i];
+    }
+
+    a[i] = key;
+    quickSort(a, left, i - 1);
+    quickSort(a, i + 1, right);
+}
+
+/**
+ * @brief binarySearch  二分查找
+ * @param a             有序数组
+ * @param n             数组大小
+ * @param key           查找的值
+ * return               找到返回下标，找不到返回-1
+ * 时间复杂度：           O(logn)
+ */
+int binarySearch(int a[], int n, int key)
+{
+    int i = 0;
+    int j = n - 1;
+    while(i <= j)
+    {
+        int mid = (i + j) / 2;
+        if(a[mid] > key)
+        {
+            j = mid - 1;
+        }
+        else if(a[mid] < key)
+        {
+            i = mid + 1;
+        }
+        else
+        {
+            return mid;
+        }
+    }
+    return -1;
+}
+
 void display(int a[], int n)
 {
     for(int i = 0; i < n; ++i)
@@ -171,7 +239,10 @@ int main()
     //cocktailSort(a, n);
     //selectSort(a, n);
     //insertSort(a, n);
-    insertSortDichotomy(a, n);
+    //insertSortDichotomy(a, n);
+    quickSort(a, 0, n - 1);
+
+    printf("len = %d\n", binarySearch(a, n, 7));
 
     display(a, n);
 

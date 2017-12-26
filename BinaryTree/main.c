@@ -1,15 +1,6 @@
 #include <stdio.h>
 #include "stack.h"
 
-struct BinaryTree
-{
-    int value;
-    struct BinaryTree* left;
-    struct BinaryTree* right;
-};
-
-typedef struct BinaryTree BinaryTree;
-
 /**
  * @brief createNode  生成一个节点
  * @param value       当前节点的值
@@ -120,6 +111,23 @@ void noPrevTraversal(BinaryTree* tree)
     stack* st = createStack();
     if(st == NULL)
         return;
+
+    BinaryTree* root = tree;
+    while(root || empty(st))
+    {
+        while(root)
+        {
+            printf("value = %d\n", root->value);
+            pushItem(st, root);
+            root = root->left;
+        }
+
+        root = popItem(st);
+        if(root)
+        {
+            root = root->right;
+        }
+    }
 }
 
 /**
@@ -177,6 +185,9 @@ int main()
     //前序遍历
     printf("\nprev traversal :\n");
     prevTraversal(root);
+
+    printf("\nno prev traversal :\n");
+    noPrevTraversal(root);
 
     //中序遍历
     printf("\nmid traversal :\n");

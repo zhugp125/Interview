@@ -1,22 +1,34 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include <malloc.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 #define MaxSize 100
 
+struct BinaryTree
+{
+    int value;
+    struct BinaryTree* left;
+    struct BinaryTree* right;
+};
+typedef struct BinaryTree BinaryTree;
+
 struct stack
 {
-    int values[MaxSize];
+    BinaryTree* values[MaxSize];
     int index;
-}stack;
+};
+typedef struct stack stack;
 
-void pushItem(stack* s, int value);
+void pushItem(stack* s, BinaryTree* value);
 
-int popItem(stack* s);
+BinaryTree* popItem(stack* s);
 
 stack* createStack();
 
 void deleteStack(stack* s);
+
+bool empty(stack* s);
 
 #endif // STACK_H

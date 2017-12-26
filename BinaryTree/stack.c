@@ -1,6 +1,6 @@
 #include "stack.h"
 
-void pushItem(stack* s, int value)
+void pushItem(stack* s, BinaryTree* value)
 {
     if(s == NULL || s->index >= MaxSize)
         return ;
@@ -9,10 +9,10 @@ void pushItem(stack* s, int value)
     ++(s->index);
 }
 
-int popItem(stack* s)
+BinaryTree* popItem(stack* s)
 {
     if(s == NULL || s->index <= 0)
-        return -1;
+        return NULL;
 
     --(s->index);
     return s->values[s->index];
@@ -35,4 +35,11 @@ void deleteStack(stack* s)
         free(s);
         s = NULL;
     }
+}
+
+bool empty(stack *s)
+{
+    if(s == NULL || s->index <= 0)
+        return false;
+    return true;
 }

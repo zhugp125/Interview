@@ -3,16 +3,9 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include "BinaryTree.h"
 
 #define MaxSize 100
-
-struct BinaryTree
-{
-    int value;
-    struct BinaryTree* left;
-    struct BinaryTree* right;
-};
-typedef struct BinaryTree BinaryTree;
 
 struct stack
 {

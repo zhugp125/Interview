@@ -7,4 +7,5 @@ SOURCES += main.c \
     stack.c
 
 HEADERS += \
-    stack.h
+    stack.h \
+    BinaryTree.h

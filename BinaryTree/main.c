@@ -98,8 +98,9 @@ void prevTraversal(BinaryTree* tree)
 }
 
 /**
- * @brief noPrevTraversal
- * @param tree
+ * @brief noPrevTraversal 前序遍历二叉树(非递归)
+ * @param tree            二叉树的根节点
+ * 遍历思路：先遍历父节点，然后遍历左节点，最后遍历右节点
  */
 void noPrevTraversal(BinaryTree* tree)
 {

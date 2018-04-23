@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # _*_ coding: utf-8 _*_
+from functools import reduce
 
 # map(function, Iterable) -> Iterator
 def f(x):
@@ -41,19 +42,25 @@ def prod(L):
 
 print('3 * 5 * 7 * 9 = ', prod([3, 5, 7, 9]))
 
+flag = True
+base = 10
 def str2float(s):
-    flag = True
     def fn(x, y):
-        if str(x) == '.' or str(y) == '.':
+        global flag, base
+        if str(y) == '.':
             flag = False
-            return 1
-
-        if flag:
-            return x * 10 + y
+            base = 1
+            return x
         else:
-            return x + y / 10
+            if flag:
+                return x * base + y
+            else:
+                base = base * 0.1
+                return x + y * base
 
     def char2num(s):
         return {'0':0, '1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '.':'.'}[s]
+
+    return reduce(fn, map(char2num, s))
 
 print('str2float(\'123.456\')', str2float('123.456'))

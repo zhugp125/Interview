@@ -84,8 +84,49 @@ class Slice(object):
                 start = 0
             if step is None:
                 step = 1
-            L = list(range(start, stop))
-            return L[start:stop:step]
+            L = []
+            i = 0
+            for v in range(start, stop):
+                if i % step == 0:
+                    L.append(v)
+                i = i + 1
+            return L
 
 s = Slice()
-print(s[1:8:2])
+print(s[:8:2])
+
+# __getattr__()
+class MiddleStudent(object):
+
+    def __init__(self, name):
+        self.__name = name
+
+    @property
+    def name(self):
+        return self.__name
+
+    def __getattr__(self, attr):
+        if attr == 'score':
+            return 80
+        elif attr == 'age':
+            return lambda: 24
+        return AttributeError('\'Student\' object has no attribute \'%s\'' % attr)
+
+ms = MiddleStudent('Team')
+print(ms.name)
+print(ms.score)
+print(ms.age())
+
+# __call__
+class Callable(object):
+
+    def __init__(self, name):
+        self.__name = name
+
+    def __call__(self, age):
+        if not isinstance(age, int):
+            raise TypeError('age is must be integer type')
+        print('My name is %s, %d old' % (self.__name, age))
+
+c = Callable('Tom')
+c(24)

@@ -1,4 +1,4 @@
-#！/usr/bin/env python3
+#!/usr/bin/env python3
 # _*_ coding: utf-8 _*_
 
 # read line

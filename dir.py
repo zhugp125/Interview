@@ -33,10 +33,10 @@ print(os.path.split(dir_name))    # (/Users/a123/Downloads/Github/Interview, dir
 print(os.path.splitext(dir_name)) # (/Users/a123/Downloads/Github/Interview/dir, .py)
 
 # rename: file is exists
-os.rename('./TestFile/text.txt', 'text.py')
+#os.rename('./TestFile/text.txt', 'text.py')
 
 # delete name: file is exists
-os.remove('./text.py')
+#os.remove('./text.py')
 
 # filter file
 print([x for x in os.listdir('.') if os.path.isdir(x)])
@@ -46,3 +46,12 @@ print([x for x in os.listdir('.') if os.path.isfile(x) and os.path.splitext(x)[1
 
 # opeartor dor or file module
 # os, os.path, shutil
+
+def findFile(s, path='.'):
+    for x in os.listdir(path):
+        if os.path.isdir(x):
+            return findFile(s, x)
+        elif os.path.isfile(x) and os.path.abspath(x).find(s) != -1:
+            return x
+
+print(findFile('test'))

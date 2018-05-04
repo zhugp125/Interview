@@ -29,3 +29,22 @@ with open('json.txt', 'wb') as f:
 
 with open('json.txt', 'rb') as f:
     print(json.load(f))
+
+# custom class
+class Student(object):
+
+    def __init__(self, name, age, score):
+        self.name = name
+        self.age = age
+        self.score = score
+
+def studentToDict(st):
+    return dict(name=st.name, age=st.age, score=st.score)
+
+def toStudent(s):
+    return Student(s['name'], s['age'], s['score'])
+
+st = Student('Tom', 18, 81)
+ret = json.dumps(st, default=lambda obj: obj.__dict__) # default=studentToDict
+print(ret)
+print(json.loads(ret, object_hook=toStudent))

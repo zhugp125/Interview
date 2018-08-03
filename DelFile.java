@@ -7,15 +7,13 @@ public class DelFile {
             return ;
         }
 
-        if (file.isFile()) {
-            file.delete();
-        } else {
+        if (file.isDirectory()) {
             File[] files = file.listFiles();
             for (File f : files) {
                 deleteFile(f);
             }
-            file.delete();
         }
+        file.delete();
     }
 
     public static void main(String[] args) {

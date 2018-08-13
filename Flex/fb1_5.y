@@ -18,8 +18,8 @@ exp: factor
     ;
 
 factor: term
-    | factor MUL term { $$ == $1 * $3; }
-    | factor DIV term { $$ == $1 / $3; }
+    | factor MUL term { $$ = $1 * $3; }
+    | factor DIV term { $$ = $1 / $3; }
     ;
 
 term: NUMBER
@@ -32,7 +32,7 @@ int main(int argc, char** argv)
     return 0;
 }
 
-yyerror(char *s)
+int yyerror(char *s)
 {
-    fprintf(stderr, "error: %s\n", s);
+    return fprintf(stderr, "error: %s\n", s);
 }

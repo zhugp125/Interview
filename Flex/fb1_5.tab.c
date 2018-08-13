@@ -1331,12 +1331,12 @@ yyreduce:
 
   case 8:
 #line 21 "fb1_5.y"
-    { (yyval) == (yyvsp[(1) - (3)]) * (yyvsp[(3) - (3)]); ;}
+    { (yyval) = (yyvsp[(1) - (3)]) * (yyvsp[(3) - (3)]); ;}
     break;
 
   case 9:
 #line 22 "fb1_5.y"
-    { (yyval) == (yyvsp[(1) - (3)]) / (yyvsp[(3) - (3)]); ;}
+    { (yyval) = (yyvsp[(1) - (3)]) / (yyvsp[(3) - (3)]); ;}
     break;
 
   case 11:
@@ -1568,7 +1568,7 @@ int main(int argc, char** argv)
     return 0;
 }
 
-yyerror(char *s)
+int yyerror(char *s)
 {
-    fprintf(stderr, "error: %s\n", s);
+    return fprintf(stderr, "error: %s\n", s);
 }

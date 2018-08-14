@@ -348,7 +348,7 @@ union yyalloc
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  11
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  18
+#define YYNSTATES  19
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
@@ -404,7 +404,7 @@ static const yytype_int8 yyrhs[] =
       11,     0,    -1,    -1,    11,    12,     9,    -1,    13,    -1,
       12,     4,    13,    -1,    12,     5,    13,    -1,    14,    -1,
       13,     6,    14,    -1,    13,     7,    14,    -1,     3,    -1,
-       8,    14,    -1
+       8,    14,     8,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
@@ -445,7 +445,7 @@ static const yytype_uint8 yyr1[] =
 static const yytype_uint8 yyr2[] =
 {
        0,     2,     0,     3,     1,     3,     3,     1,     3,     3,
-       1,     2
+       1,     3
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -453,8 +453,8 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       2,     0,     1,    10,     0,     0,     4,     7,    11,     0,
-       0,     3,     0,     0,     5,     6,     8,     9
+       2,     0,     1,    10,     0,     0,     4,     7,     0,     0,
+       0,     3,     0,     0,    11,     5,     6,     8,     9
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -468,8 +468,8 @@ static const yytype_int8 yydefgoto[] =
 #define YYPACT_NINF -5
 static const yytype_int8 yypact[] =
 {
-      -5,     2,    -5,    -5,    -2,     7,    -3,    -5,    -5,    -2,
-      -2,    -5,    -2,    -2,    -3,    -3,    -5,    -5
+      -5,     2,    -5,    -5,    -2,     7,    -3,    -5,    -1,    -2,
+      -2,    -5,    -2,    -2,    -5,    -3,    -3,    -5,    -5
 };
 
 /* YYPGOTO[NTERM-NUM].  */
@@ -485,13 +485,13 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       8,     3,     2,    12,    13,     3,     4,     0,    16,    17,
-       4,     9,    10,    14,    15,     0,    11
+       8,     3,     2,    12,    13,     3,     4,    14,    17,    18,
+       4,     9,    10,    15,    16,     0,    11
 };
 
 static const yytype_int8 yycheck[] =
 {
-       4,     3,     0,     6,     7,     3,     8,    -1,    12,    13,
+       4,     3,     0,     6,     7,     3,     8,     8,    12,    13,
        8,     4,     5,     9,    10,    -1,     9
 };
 
@@ -500,7 +500,7 @@ static const yytype_int8 yycheck[] =
 static const yytype_uint8 yystos[] =
 {
        0,    11,     0,     3,     8,    12,    13,    14,    14,     4,
-       5,     9,     6,     7,    13,    13,    14,    14
+       5,     9,     6,     7,     8,    13,    13,    14,    14
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1341,7 +1341,7 @@ yyreduce:
 
   case 11:
 #line 26 "fb1_5.y"
-    { (yyval) = (yyvsp[(2) - (2)]) > 0 ? (yyvsp[(2) - (2)]) : -(yyvsp[(2) - (2)]); ;}
+    { (yyval) = (yyvsp[(2) - (3)]) > 0 ? (yyvsp[(2) - (3)]) : -(yyvsp[(2) - (3)]); ;}
     break;
 
 

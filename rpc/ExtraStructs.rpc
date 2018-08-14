@@ -1,0 +1,45 @@
+﻿Namespace = ttservice
+ServiceName = ExtraStructs
+ExportMacro = DLL_EXPORT_TRADERSTRUCTS
+
+Includes = (
+    idata/IData.h,
+    idata/IDataBson.h,
+    Protocol/rpc_Structs_Def.h,
+    Protocol/rpc_Enums.h,
+    Protocol/rpc_ExtraEnums.h,
+    base/tbStructsCommon.h,
+    LicenseConfig/LicenseConfig.h
+    luawrapper/Int64Wrapper.h,
+)
+
+CppIncludes = (
+    Protocol/rpc_Structs.h,
+    idata/IDataCreator.h,
+    boost/assign/list_of.hpp,
+)
+
+LuaIncludes = (
+    lua/lua.hpp,
+    base/tbStructsCommon.h,
+)
+
+# 格式说明 :
+# fieldTag : fieldType [= defaultValue] | index | name | isKey||; [// comment]
+# 如:
+# m_nPlatformID : #i = 5 | 1 | 平台号 |1 ||;//注释
+# 可见之类的  股票0、期货1、组合2、信用3、个股期权4、沪港通5、全国股转6、非标7、黄金8、外盘9 银行间11 深港通12 期货期权13 新类型必须填入TypeManager，否则默认按照股票走 
+# 具体顺序去看TypeManager的tradeTypeToIdx，必看
+###################################################################################################################################################
+########################################################    以下是通用结构   ######################################################################
+###################################################################################################################################################
+
+#持仓组合未成部分
+CPortfolioIncrementUnComplete : (
+    m_nId: #i | |name= | isKey = 1 | precision =  | netprecision=| flag =  |  visible = 0,1,2,3,4,5,6,7,8,9,10,12,13 | property= | func= ; // 组合Id
+    m_nProductID : #i| |name= | isKey = | precision =  | netprecision=| flag =  |  visible = 0,1,2,3,4,5,6,7,8,9,10,12,13 | property= | func= ; 
+    m_strDate:#s | |name= | isKey = 1 | precision =  | netprecision=| flag =  |  visible = 0,1,2,3,4,5,6,7,8,9,10,12,13 | property= | func= ; // 日期
+    m_unCompletes:{#s:#i}| |name= | isKey = | precision =  | netprecision=| flag =  |  visible = 0,1,2,3,4,5,6,7,8,9,10,12,13 | property= | func= ; //未成交部分
+    m_nUserId : #i| |name= | isKey = | precision =  | netprecision=| flag = |  visible = 0,1,2,3,4,5,6,7,8,9,10,12,13 | property= | func= ; // 关联的用户Id
+    m_ePortfolioType:EPortfolioType=ttservice::PORTFOLIO_UNKNOWN_TYPE| |name= | isKey = | precision =  | netprecision=| flag =  |  visible = 0,1,2,3,4,5,6,7,8,9,10,12,13 | property= | func= ;投资组合类型
+){ptr, structId=654}

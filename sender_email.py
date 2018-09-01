@@ -58,15 +58,16 @@ def send_email_sina(sender, password, receiver, msg):
         print('send email success')
         # 关闭连接
         server.quit()
-    except Exception:
+    except Exception as err:
+        print(err)
         print('send email failed')
 
 def send_email_163(sender, password, receiver, msg):
     try:
         # 找到发送邮箱的服务器地址，已加密形式发送
-        server = smtplib.SMTP_SSL('smtp.sina.com', 465)
+        server = smtplib.SMTP_SSL('smtp.163.com', 465)
         server.set_debuglevel(1)
-        server.starttls()
+        #server.starttls() # 163普通用户不能加密发送，VIP用户可以
         # 登录邮箱
         server.login(sender, password)
         # 发送邮件
@@ -79,18 +80,18 @@ def send_email_163(sender, password, receiver, msg):
         print('send email failed')
 
 def main():
-    email_from = 'zhugp125@sina.com'
+    email_from = '18811475054@163.com'
     email_to = '我'
     email_subject = 'zgp 2018/09/01'
     email_text = '邮件正文....'
-    annex_path = '/Users/a123/Downloads/Github/sourcetree.license'
-    annex_name = 'sourcetree.license'
+    annex_path = 'D:/workspace/JsonTest.java'
+    annex_name = 'JsonTest.java'
 
     msg = create_email(email_from, email_to, email_subject, email_text, annex_path, annex_name)
 
-    sender = 'zhugp125@sina.com'
-    password = 'xiaozhu125'
-    receiver = '18811475054@163.com'
+    sender = '18811475054@163.com'
+    password = 'zhugp125'
+    receiver = 'zhugp125@sina.com'
     send_email_163(sender, password, receiver, msg)
 
 if __name__ == '__main__':

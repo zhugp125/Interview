@@ -5,6 +5,7 @@
 # pip install wxpy
 
 # MacOS 10.13.4 验证过
+# Windows 10    验证过
 
 from __future__ import unicode_literals
 from threading import Timer

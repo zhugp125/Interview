@@ -17,7 +17,7 @@
 - tree 树形结构显示目录，需要安装tree包
 - pwd 显示当前目录
 - ln  创建链接文件
-- more、less 分页显示文件文件内容
+- more、less 分页显示文件内容
 - head、tail 显示文件头、尾内容
 - ctrl+alt+F1 命令行全屏模式
 - top 显示系统当前的进程和其他状况

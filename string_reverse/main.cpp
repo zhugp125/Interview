@@ -6,7 +6,7 @@ using namespace std;
 /**
  * 字符串反序
  * 例如 This is a macbook  -> sihT si a koobcam
- * 时间复杂度 On
+ * 时间复杂度 O(n)
 */
 
 bool reverse(const char* input, char* output)
@@ -44,12 +44,114 @@ bool reverse(const char* input, char* output)
     return true;
 }
 
+class String
+{
+public:
+    String(char* str = nullptr)
+    {
+        if (nullptr == str)
+        {
+            m_data = new char[1];
+            m_data[0] = '\0';
+        }
+        else
+        {
+            int len = strlen(str);
+            m_data = new char[len + 1];
+            strcpy(m_data, str);
+        }
+    }
+
+    String(const String& str)
+    {
+        int len = strlen(str.m_data);
+        m_data = new char[len + 1];
+        strcpy(m_data, str.m_data);
+    }
+
+    ~String()
+    {
+        delete m_data;
+    }
+
+    size_t size() const
+    {
+        return strlen(m_data);
+    }
+
+    char* c_str() const
+    {
+        return m_data;
+    }
+
+private:
+    char* m_data;
+};
+
+/*
+ * string to int
+ * 考虑输入为空，输入负号，小数点前输入除负号以外的非数字字符
+ * 时间复杂度 O(n)
+*/
+int stringToInt(const char* s, bool *ok = nullptr)
+{
+    (ok != nullptr) ? (*ok = false) : 0;
+
+    if (nullptr == s)
+    {
+        return 0;
+    }
+
+    int symbol = 1;
+    if (*s == '-')
+    {
+        symbol = -1;
+        ++s;
+    }
+
+    int ret = 0;
+    do
+    {
+        if (*s == '.')
+        {
+            break;
+        }
+        else if (*s < '0' || *s > '9')
+        {
+            return 0;
+        }
+
+        ret *= 10;
+        ret += (*s - '0');
+        ++s;
+    }while (*s);
+
+    (ok != nullptr) ? (*ok = true) : 0;
+    return ret * symbol;
+}
+
 int main()
 {
     const char* input = "This is a macbook";
     char output[18] = {0};
     reverse(input, output);
     cout << output << endl;
+
+    cout << boolalpha;
+    bool ok;
+    int ret = stringToInt("", &ok);
+    cout << ok << " " << ret << endl;
+
+    ret = stringToInt("1234", &ok);
+    cout << ok << " " << ret << endl;
+
+    ret = stringToInt("-12.34", &ok);
+    cout << ok << " " << ret << endl;
+
+    ret = stringToInt("12a34", &ok);
+    cout << ok << " " << ret << endl;
+
+    cout << noboolalpha;
 
     cout << "Hello World!" << endl;
     return 0;

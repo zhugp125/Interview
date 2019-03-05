@@ -91,6 +91,7 @@ private:
 /*
  * string to int
  * 考虑输入为空，输入负号，小数点前输入除负号以外的非数字字符
+ * 未考虑int越界的问题
  * 时间复杂度 O(n)
 */
 int stringToInt(const char* s, bool *ok = nullptr)

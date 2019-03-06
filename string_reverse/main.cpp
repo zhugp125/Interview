@@ -92,7 +92,7 @@ public:
 
     ~String()
     {
-        delete m_data;
+        delete[] m_data;
     }
 
     size_t size() const

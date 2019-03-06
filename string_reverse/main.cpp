@@ -69,6 +69,27 @@ public:
         strcpy(m_data, str.m_data);
     }
 
+    friend bool operator ==(const String& lhs, const String& rhs)
+    {
+        return !strcmp(lhs.m_data, rhs.m_data);
+    }
+
+    friend bool operator !=(const String& lhs, const String& rhs)
+    {
+        return !(lhs == rhs);
+    }
+
+    // 异常安全
+    String& operator =(const String& str)
+    {
+        if (*this != str)
+        {
+            String strTemp(str);
+            std::swap(strTemp.m_data, m_data);
+        }
+        return *this;
+    }
+
     ~String()
     {
         delete m_data;
@@ -91,7 +112,7 @@ private:
 /*
  * string to int
  * 考虑输入为空，输入负号，小数点前输入除负号以外的非数字字符
- * 未考虑int越界的问题
+ * 考虑int越界的问题
  * 时间复杂度 O(n)
 */
 int stringToInt(const char* s, bool *ok = nullptr)
@@ -110,7 +131,8 @@ int stringToInt(const char* s, bool *ok = nullptr)
         ++s;
     }
 
-    int ret = 0;
+    int nRet = 0;
+    int nTemp = 0;
     do
     {
         if (*s == '.')
@@ -122,13 +144,19 @@ int stringToInt(const char* s, bool *ok = nullptr)
             return 0;
         }
 
-        ret *= 10;
-        ret += (*s - '0');
+        nTemp = nRet;
+        nRet *= 10;
+        nRet += (*s - '0');
+        if (nTemp > nRet)
+        {
+            return 0;
+        }
+
         ++s;
     }while (*s);
 
     (ok != nullptr) ? (*ok = true) : 0;
-    return ret * symbol;
+    return nRet * symbol;
 }
 
 int main()

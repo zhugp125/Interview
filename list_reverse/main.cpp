@@ -132,6 +132,37 @@ Node* find(Node* pHead, int value)
     return pNode;
 }
 
+/*
+ * 找到链表pHead的倒数第k个节点
+*/
+Node* findKthToTail(Node* pHead, unsigned int k)
+{
+    if (nullptr == pHead || k == 0)
+    {
+        return nullptr;
+    }
+
+    Node* pAhead = pHead;
+    // 第一个节点先走k - 1步
+    while (pAhead && k > 1)
+    {
+        pAhead = pAhead->m_next;
+        --k;
+    }
+    if (nullptr == pAhead)  // 链表的长度小于k
+    {
+        return nullptr;
+    }
+
+    Node* pBehind = pHead;
+    while (pAhead->m_next != nullptr)
+    {
+        pBehind = pBehind->m_next;
+        pAhead = pAhead->m_next;
+    }
+    return pBehind;
+}
+
 int main()
 {
     Node* pHead = create(1);
@@ -150,9 +181,16 @@ int main()
     }
 
     display(pHead);
-
     pHead = reverse(pHead);
     display(pHead);
+
+    {
+        Node* pNode = findKthToTail(pHead, 0);
+        if (pNode != nullptr)
+        {
+            cout << pNode->m_value << endl;
+        }
+    }
 
     destory(pHead);
 

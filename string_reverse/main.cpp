@@ -118,7 +118,6 @@ private:
 int stringToInt(const char* s, bool *ok = nullptr)
 {
     (ok != nullptr) ? (*ok = false) : 0;
-
     if (nullptr == s)
     {
         return 0;
@@ -131,8 +130,7 @@ int stringToInt(const char* s, bool *ok = nullptr)
         ++s;
     }
 
-    int nRet = 0;
-    int nTemp = 0;
+    long long nResult = 0;
     do
     {
         if (*s == '.')
@@ -144,19 +142,39 @@ int stringToInt(const char* s, bool *ok = nullptr)
             return 0;
         }
 
-        nTemp = nRet;
-        nRet *= 10;
-        nRet += (*s - '0');
-        if (nTemp > nRet)
-        {
-            return 0;
-        }
-
+        nResult = nResult * 10 + (*s - '0');
         ++s;
     }while (*s);
 
+    if (nResult < INT_MIN || nResult > INT_MAX)
+    {
+        return 0;
+    }
+
     (ok != nullptr) ? (*ok = true) : 0;
-    return nRet * symbol;
+    return (int)nResult * symbol;
+}
+
+/*!
+ * \brief isPalindromic 回文字符串判断
+ * \param str 输入字符串
+ * \return    是否回文
+ * 时间复杂度 O(n)
+ */
+bool isPalindromic(const char* str)
+{
+    if (nullptr == str)
+    {
+        return false;
+    }
+
+    size_t len = strlen(str);
+    for (int i = 0, j = len -1; i < j; ++i, --j)
+    {
+        if (str[i] != str[j])
+            return false;
+    }
+    return true;
 }
 
 int main()

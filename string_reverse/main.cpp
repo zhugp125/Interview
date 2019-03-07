@@ -8,7 +8,6 @@ using namespace std;
  * 例如 This is a macbook  -> sihT si a koobcam
  * 时间复杂度 O(n)
 */
-
 bool reverse(const char* input, char* output)
 {
     if (nullptr == input || nullptr == output)
@@ -40,6 +39,41 @@ bool reverse(const char* input, char* output)
         {
             output[index++] = sep;
         }
+    }
+    return true;
+}
+
+/**
+ * 字符串反转，在原字符串基础上反转
+ * 时间复杂度 O(n)
+*/
+bool reverse(char* input)
+{
+    if (nullptr == input)
+    {
+        return false;
+    }
+
+    size_t size = strlen(input);
+    size_t beg = 0;
+    for (size_t i = 0; i < size; ++i)
+    {
+        if (input[i] != ' ' && i != size - 1)
+        {
+            continue;
+        }
+
+        size_t last = (i == size - 1) ? i : i - 1;
+        while (beg < last)
+        {
+            char temp = input[beg];
+            input[beg] = input[last];
+            input[last] = temp;
+
+            ++beg;
+            --last;
+        }
+        beg = i + 1;
     }
     return true;
 }
@@ -177,11 +211,16 @@ bool isPalindromic(const char* str)
     return true;
 }
 
+/*!
+ * \brief replaceBlank  替换空格
+ * \param str           输入字符数组
+ * \param length        字符数组长度
+ */
 void replaceBlank(char str[], int length)
 {
     if (nullptr == str)
     {
-        return false;
+        return;
     }
 
     int orginalLength = 0;
@@ -222,6 +261,12 @@ int main()
     char output[18] = {0};
     reverse(input, output);
     cout << output << endl;
+
+    {
+        char input[] = "This is a macbook";
+        reverse(input);
+        cout << input << endl;
+    }
 
     cout << boolalpha;
     bool ok;

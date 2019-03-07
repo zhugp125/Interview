@@ -177,6 +177,45 @@ bool isPalindromic(const char* str)
     return true;
 }
 
+void replaceBlank(char str[], int length)
+{
+    if (nullptr == str)
+    {
+        return false;
+    }
+
+    int orginalLength = 0;
+    int blankCount = 0;
+    char* p = str;
+    while (*p)
+    {
+        ++orginalLength;
+        if (*p == ' ')
+            ++blankCount;
+    }
+
+    int newLength = orginalLength + blankCount * 2;
+    if (newLength > length)
+        return;
+
+    int orginalIndex = orginalLength;
+    int newIndex = newLength;
+    while (orginalIndex > 0 && orginalIndex < newIndex)
+    {
+        if (str[orginalIndex] != ' ')
+        {
+            str[newIndex--] = str[orginalIndex];
+        }
+        else
+        {
+            str[newIndex--] = '0';
+            str[newIndex--] = '2';
+            str[newIndex--] = '%';
+        }
+        --orginalIndex;
+    }
+}
+
 int main()
 {
     const char* input = "This is a macbook";
